@@ -61,7 +61,10 @@
  ##  堆排序
  
  堆排序讲解链接
+ 
  https://www.cnblogs.com/Java3y/p/8639937.html
+ 
+ http://www.cnblogs.com/skywang12345/p/3602162.html#a43
  
  ### 堆简介
  堆排序（英语：Heapsort）是指利用堆这种数据结构所设计的一种排序算法。堆是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点.
@@ -71,4 +74,76 @@
  * 创建最大堆（Build Max Heap）：将堆中的所有数据重新排序
  * 堆排序（HeapSort）：移除位在第一个数据的根节点，并做最大堆调整的递归运算 
 
+```java
+public class HeapSort {
+
+    public static void heapSort(int[] arr) {
+
+        if (arr == null || arr.length < 2) {
+            return;
+        }
+        
+        //第一次建堆
+        for (int i = 0; i < arr.length; i++) {
+            heapInsert(arr, i);
+        }
+        int size = arr.length;//堆中元素的个数
+        //第一次交换
+        swap(arr, 0, --size);
+        /**
+         * 一直就是一个建堆和交换的过程
+         * 建一次堆,交换一次(堆顶元素和堆最后一个元素交换,即数组第一位和最后一位交换),就完成一次排序
+         */
+        while (size > 0) {
+            heapify(arr, 0, size);//建堆
+            swap(arr, 0, --size);//交换
+        }
+    }
+
+    public static void heapInsert(int[] arr, int index) {
+
+        while (arr[index] > arr[(index - 1) / 2]) {
+            swap(arr, index, (index - 1) / 2);
+            index = (index - 1) / 2;
+        }
+    }
+
+    /**
+     * 在构建最大堆
+     *
+     * @param arr
+     * @param index
+     * @param size
+     */
+    public static void heapify(int[] arr, int index, int size) {
+
+        int left = index * 2 + 1;
+        // int right = index *2 +2 ;
+        while (left < size) {
+            /**
+             * left+1表示右节点
+             * 左节点和右节点比较,得出左右节点当中的最大的节点
+             * 然后再和左右节点的根节点比较得出三个中的最大值
+             *
+             */
+            int largest = left + 1 < size && arr[left + 1] > arr[left] ? left + 1 : left;//得出左右节点最大的
+            largest = arr[largest] > arr[index] ? largest : index; //和根节点比较得出最大的
+            if (largest == index) {
+                break;
+            }
+            swap(arr, largest, index); //根节点进行交换
+            index = largest;
+            left = index * 2 + 1;
+        }
+    }
+
+    public static void swap(int[] arr, int i, int j) {
+
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+    
+}
+```
  
