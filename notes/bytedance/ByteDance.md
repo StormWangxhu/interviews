@@ -4,7 +4,7 @@
     * [堆排序](#堆排序)
     
 * [链表]()
-    * [1.反转单向链表双向链表](#反转单向链表双向链表)
+    * [1.链表反转](#链表反转)
     * [2.判断一个链表是否是回文结构](#)
     * [3.复制含有随机指针节点的链表](#)
     * [4.单链表奇数位升许偶数位降序整体使有序(频率很高)](#)
@@ -164,5 +164,115 @@ public class HeapSort {
     }
     
 }
+```
+
+
+# 链表反转
+
+## 翻转单向链表双向链表
+
+[leetcood206.反转单向链表](https://leetcode-cn.com/problems/reverse-linked-list/description/)
+
+### Solution
+
+单向链表
+```java
+public class Question206 {
+
+    static class Solution {
+
+        public ListNode reverseList(ListNode head) {
+
+            if (head == null) {
+                return head;
+            }
+
+            ListNode pre = null;
+            ListNode next = null;
+
+            while (head != null) {
+                next = head.next;//将第二节点进行保存
+                head.next = pre; //头结点指针指向前一个节点
+                pre = head; //pre指针向后移
+                head = next; //头结点从新定义
+            }
+            return pre;
+        }
+    }
+}
+
+```
+双向链表 和反转单向链表一样,改变指针方向
+```java
+static class Solution1 {
+
+        public DoubleNode reverseList(DoubleNode head) {
+
+            if (head == null) {
+                return head;
+            }
+
+            DoubleNode pre = null;
+            DoubleNode next = null;
+            while (head != null) {
+                next = head.next;
+                head.next = pre;
+                head.last = next;
+                pre = head;
+                head = next;
+            }
+            return pre;
+        }
+    }
+```
+
+## 反转部分单向链表
+
+[leetcode92.反转部分链表](https://leetcode-cn.com/problems/reverse-linked-list-ii/description/)
+
+### Solution
+
+```java
+static class Solution {
+
+        public ListNode reverseBetween(ListNode head, int m, int n) {
+
+            int len = 0;
+            ListNode node1 = head;
+            ListNode fPre = null;
+            ListNode tPos = null;
+            while (node1 != null) {
+                len++;
+                fPre = len == m-1 ? node1 : fPre;
+                tPos = len == n+1 ? node1 : tPos;
+                node1 = node1.next;
+            }
+
+            if (m > n || m < 0 || n > len) {
+                return head;
+            }
+
+            /**
+             * 此处部分相当于反转单向链表那中逻辑
+             */
+            //node1现在是我要反转部分的头节点
+            node1 = fPre == null ? head : fPre.next;
+            ListNode node2 = node1.next;
+            node1.next = tPos;
+            ListNode next = null;
+            while (node2 != tPos) {
+                next = node2.next;
+                node2.next = node1;
+                node1 = node2;
+                node2 = next;
+            }
+
+            if (fPre != null) {
+                fPre.next = node1;
+                return head;
+            }
+            return node1;
+        }
+    }
 ```
  
