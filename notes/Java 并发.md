@@ -258,6 +258,10 @@ public void run() {
 }
 ```
 
+# AIO,NIO,BIO
+
+https://baijiahao.baidu.com/s?id=1573998393898438&wfr=spider&for=pc
+
 # 四、中断
 
 一个线程执行完毕之后会自动结束，如果在运行过程中发生异常也会提前结束。
