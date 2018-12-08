@@ -262,6 +262,11 @@ public void run() {
 
 https://baijiahao.baidu.com/s?id=1573998393898438&wfr=spider&for=pc
 
+# Select,epoll,poll
+
+https://www.jianshu.com/p/1b4b3c738d8c
+
+
 # 四、中断
 
 一个线程执行完毕之后会自动结束，如果在运行过程中发生异常也会提前结束。
