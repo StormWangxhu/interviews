@@ -286,11 +286,11 @@ static class Solution {
 ```
 
 
-## 判断回文链表
+# 判断回文链表
 
 [leetcode234.回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/description/)
 
-### Solution
+## Solution
 
 ```java
 class Solution {
@@ -316,11 +316,11 @@ class Solution {
 }
 ```
 
-## 合并两个有序的单链表
+# 合并两个有序的单链表
 
 [leetcode21.合并两个有序的单链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/description/)
 
-### Solution
+## Solution
 
 ```java
 static class Solution{
