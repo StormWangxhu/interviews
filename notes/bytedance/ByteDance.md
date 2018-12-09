@@ -286,6 +286,36 @@ static class Solution {
 ```
 
 
+## 判断回文链表
+
+[leetcode234.回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/description/)
+
+### Solution
+
+```java
+class Solution {
+    
+        public boolean isPalindrome(ListNode head) {
+            
+           Stack<ListNode> stack = new Stack<>();
+            ListNode cur = head;
+
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.next;
+            }
+
+            while (head != null) {
+                if (head.val != stack.pop().val) {
+                    return false;
+                }
+                head = head.next;
+            }
+            return true;
+        }
+}
+```
+
 ## 合并两个有序的单链表
 
 [leetcode21.合并两个有序的单链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/description/)
