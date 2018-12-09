@@ -51,7 +51,7 @@
  
 * [Linux top命令](#Linux top命令)
 
- # top命令
+ # Linux top命令
  
  查看cpu,内存
 
