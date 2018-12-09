@@ -319,6 +319,53 @@ class Solution {
 还有方法二:也是利用栈结构,但其实并不需要将所有节点都压入栈中,只用压入一半的节点即可.首先假设链表的长度的为N,如果N为偶数,前N/2的节点为左半区,后N/2的节点为右半区.如果N是奇数,忽略位于中间的节点,还是前N/2为左半区,右N/2为右半区.
 
 
+方法三:
+
+```java
+class Solution {
+    
+    public boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null) return true;
+        ListNode slow = head, fast = head.next;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        if (fast != null) slow = slow.next;  // 偶数节点，让 slow 指向下一个节点
+        cut(head, slow);                     // 切成两个链表
+        return isEqual(head, reverse(slow));
+    }
+
+    private void cut(ListNode head, ListNode cutNode) {
+        while (head.next != cutNode) {
+            head = head.next;
+        }
+        head.next = null;
+    }
+
+    private ListNode reverse(ListNode head) {
+        ListNode newHead = null;
+        while (head != null) {
+            ListNode nextNode = head.next;
+            head.next = newHead;
+            newHead = head;
+            head = nextNode;
+        }
+        return newHead;
+    }
+
+    private boolean isEqual(ListNode l1, ListNode l2) {
+        while (l1 != null && l2 != null) {
+            if (l1.val != l2.val) return false;
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+        return true;
+    }
+}
+```
+
+
 # 合并两个有序的单链表
 
 [leetcode21.合并两个有序的单链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/description/)
@@ -357,3 +404,7 @@ https://blog.csdn.net/zxm1306192988/article/details/82837470
 
 
  
+# 删除有序单链表中重复节点
+
+https://github.com/StormWangxhu/algorithm/blob/master/src/me/wangxhu/leedcode/linkedlist/Question83.java
+
