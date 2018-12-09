@@ -286,7 +286,7 @@ static class Solution {
 ```
 
 
-# 判断回文链表
+# 判断一个链表是否是回文结构
 
 [leetcode234.回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/description/)
 
