@@ -46,6 +46,7 @@
     * [1.N个数字,求出其中第K大的数]()
     * [2.滑动窗口问题(频率很高)]()
     * [3.设计RandomPool结构(频率很高)](#设计RandomPool结构)
+    * [4.LRUCache缓存机制](#LRUCache缓存机制)
   
  
 * [Linux top命令](#Linux top命令)
@@ -412,6 +413,8 @@ https://github.com/StormWangxhu/algorithm/blob/master/src/me/wangxhu/leedcode/li
 
 ## 设计RandomPool结构
 
+[leetcode381.O(1) 时间插入、删除和获取随机元素 - 允许重复](https://leetcode-cn.com/problems/insert-delete-getrandom-o1-duplicates-allowed/description/)
+
 ```java
 static class RandomizedCollection {
 
@@ -473,5 +476,132 @@ static class RandomizedCollection {
             return list.get(random.nextInt(list.size()));
         }
 
+    }
+```
+
+
+## LRUCache缓存机制
+
+[leetcode146.LRUCache缓存机制](https://leetcode-cn.com/problems/lru-cache/description/)
+
+
+```java
+static class LRUCache{
+
+        public static class DLinkList {
+            int key, value;
+            DLinkList left;
+            DLinkList right;
+
+            DLinkList(int key, int value) {
+                this.key = key;
+                this.value = value;
+                left = null;
+                right = null;
+            }
+        }
+
+        private Map<Integer, DLinkList> cache;
+        private DLinkList head, tail;
+        private int capacity, currentSize;
+
+        /**
+         * Pop head node
+         *
+         * @return
+         */
+        private DLinkList popHead() {
+            if (!head.right.equals(tail)) {
+                DLinkList node = head.right;
+                head.right = node.right;
+                node.right.left = head;
+                node.right = null;
+                node.left = null;
+                return node;
+            }
+            return null;
+        }
+
+        /**
+         * Push to tail
+         *
+         * @param node
+         */
+        private void offer(DLinkList node) {
+            tail.left.right = node;
+            node.left = tail.left;
+            node.right = tail;
+            tail.left = node;
+        }
+
+        /**
+         * Move node to tail
+         *
+         * @param node
+         */
+        private void moveToTail(DLinkList node) {
+            node.left.right = node.right;
+            node.right.left = node.left;
+            offer(node);
+        }
+
+        /**
+         * Main method
+         *
+         * @param args
+         * @throws Exception
+         */
+        public static void main(String[] args) throws Exception {
+            LRUCache cache = new LRUCache(2);
+            cache.put(1, 1);
+            cache.put(2, 2);
+            System.out.println(cache.get(1));
+            cache.put(3, 3);
+            System.out.println(cache.get(2));
+            cache.put(4, 4);
+            System.out.println(cache.get(1));
+            System.out.println(cache.get(3));
+            System.out.println(cache.get(4));
+        }
+
+        public LRUCache(int capacity) {
+            this.capacity = capacity;
+            this.currentSize = 0;
+            cache = new HashMap<>();
+            head = new DLinkList(-1, -1);
+            tail = new DLinkList(-1, -1);
+            head.right = tail;
+            tail.left = head;
+        }
+
+        public int get(int key) {
+            if (cache.get(key) == null) return -1;
+            DLinkList node = cache.get(key);
+            moveToTail(node);
+            return node.value;
+        }
+
+        public void put(int key, int value) {
+            if (cache.containsKey(key)) {
+                DLinkList node = cache.get(key);
+                node.value = value;
+                moveToTail(node);
+            } else {
+                if (capacity == currentSize) {
+                    DLinkList head = popHead();
+                    if (head != null) {
+                        cache.remove(head.key);
+                        DLinkList node = new DLinkList(key, value);
+                        offer(node);
+                        cache.put(key, node);
+                    }
+                } else {
+                    DLinkList node = new DLinkList(key, value);
+                    offer(node);
+                    cache.put(key, node);
+                    ++currentSize;
+                }
+            }
+        }
     }
 ```
