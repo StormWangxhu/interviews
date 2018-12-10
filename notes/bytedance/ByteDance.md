@@ -48,12 +48,15 @@
     * [3.设计RandomPool结构(频率很高)](#设计RandomPool结构)
     * [4.LRUCache缓存机制](#LRUCache缓存机制)
   
-* [Linux top命令](#Linux top命令)
+* [Linux](#Linux)
+    * [top命令查看cpu/内存](#top命令查看cpu/内存)
 
 
 
 
- # Linux top命令
+ # Linux 
+ 
+ ## top命令查看cpu/内存
  
  查看cpu,内存
 
