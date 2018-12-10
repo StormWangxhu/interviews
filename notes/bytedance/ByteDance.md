@@ -50,7 +50,7 @@
   
 * [Linux](#Linux)
     * [top命令查看cpu/内存](#top命令查看cpu/内存)
-    * [netstat命令查看网络/接口]()
+    * [netstat命令查看网络/接口](#netstat命令查看网络/接口)
 
 
 # 数组
@@ -270,14 +270,21 @@ static class Solution {
 
 # Linux 
  
- ## top命令查看cpu/内存
+## top命令查看cpu/内存
  
  查看cpu,内存
 
 https://www.cnblogs.com/dragonsuc/p/5512797.html
 
 
- # 排序
+## netstat命令查看网络链接/端口使用
+
+百度百科
+
+https://baike.baidu.com/item/Netstat/527020?fr=aladdin
+
+
+# 排序
  
  稳定性: 假设在数列中存在a[i]和a[j] ,若在排序前,a[i]在a[j]前面;并且在排序后,a[i]还是在a[j]前面,则这个算法就是稳定的!
  
