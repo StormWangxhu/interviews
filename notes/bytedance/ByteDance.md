@@ -13,11 +13,11 @@
     * [7.将搜索二叉树转换为双向链表]()
     * [8.合并两个有序的单链表](#合并两个有序的单链表)
 * [二叉树](#二叉树)
-    * [1.二叉树先中后序递归和非递归遍历]()
+    * [1.二叉树先中后序递归和非递归遍历](#二叉树先中后序遍历)
     * [2.树的路径和为n的路径(频率很高)](#树的路径和为n的路径)
     * [3.二叉树的直径](#二叉树的直径)
     * [4.二叉树的最长路径(频率很高)]()
-    * [5.判断一个树是否是查找树]()
+    * [5.判断一个树是否是查找树](#判断一个树是否是查找树)
     * [6.二叉树的层次遍历(频率很高)](#二叉树的层次遍历)
     * [7.二叉查找树中查找与给定节点最近的节点]()
     * [8.二叉树转换成双向链表]()
@@ -614,6 +614,234 @@ static class LRUCache{
 
 
 # 二叉树
+
+## 二叉树先中后序遍历
+
+[Leetcode144.二叉树的前序遍历](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/description/)
+
+[leetcode94.二叉树中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/description/)
+
+[leetcode145.二叉树后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/description/)
+
+### Solution
+
+[github/StormWangxhu](https://github.com/StormWangxhu/algorithm/blob/master/src/me/wangxhu/leedcode/tree/recursive/Question144.java)
+
+1.二叉树先序遍历 递归版
+```java
+   /**
+     * 递归实现
+     */
+    static class Solution {
+
+        static List<Integer> res;
+
+        public List<Integer> preorderTraversal(TreeNode root) {
+            res = new ArrayList<>();
+            preOrderTraversal(root);
+            return res;
+        }
+
+        private void preOrderTraversal(TreeNode root) {
+            if (root == null) {
+                return;
+            }
+
+            res.add(root.val);
+            preOrderTraversal(root.left);
+            preOrderTraversal(root.right);
+        }
+    }
+```
+1.二叉树先序遍历 迭代实现
+
+```java
+    /**
+     * 非递归实现二叉树的前序遍历
+     * 数据结构:栈
+     * 写法二
+     */
+    static class Solution3 {
+
+        public List<Integer> preorderTraversal(TreeNode root) {
+
+            List<Integer> list = new ArrayList<>();
+            Stack<TreeNode> stack = new Stack<>();
+            stack.add(root);
+            while (!stack.isEmpty()) {
+                TreeNode node = stack.pop();
+                if (node == null) {
+                    continue;
+                }
+                list.add(node.val);
+                stack.push(node.right);//先右后左,出栈的时候就会是先左后右
+                stack.push(node.left);
+            }
+            return list;
+        }
+    }
+```
+
+2.二叉树中序遍历 递归版
+
+[github/StormWangxhu](https://github.com/StormWangxhu/algorithm/blob/master/src/me/wangxhu/leedcode/tree/recursive/Question94.java)
+
+```java
+static class Solution {
+
+        public static List<Integer> res;
+
+        public List<Integer> inorderTraversal(TreeNode root) {
+            res = new ArrayList<>();
+            inOrderTraversal(root);
+            return res;
+        }
+
+        private void inOrderTraversal(TreeNode root) {
+            if (root == null) {
+                return;
+            }
+            inOrderTraversal(root.left);
+            res.add(root.val);
+            inOrderTraversal(root.right);
+        }
+    }
+```
+2.二叉树中序遍历 迭代实现
+```java
+   static class Solution1 {
+
+        public static List<Integer> res;
+        public List<Integer> inorderTraversal(TreeNode root) {
+            res = new ArrayList<>();
+            inOrderTraversal(root);
+            return res;
+        }
+
+        private void inOrderTraversal(TreeNode root) {
+            if (root == null) {
+                return;
+            }
+            Stack<TreeNode> stack = new Stack<>();
+            while (!stack.isEmpty() || root != null) {
+                if (root != null) {
+                    stack.push(root);
+                    root = root.left;
+                } else {
+                    root = stack.pop();
+                    res.add(root.val);
+                    root = root.right;
+                }
+            }
+            System.out.println();
+        }
+    }
+```
+3.二叉树后序遍历 递归实现
+
+[github/StormWangxhu](https://github.com/StormWangxhu/algorithm/blob/master/src/me/wangxhu/leedcode/tree/recursive/Question145.java)
+
+```java
+static class Solution1 {
+
+        private List<Integer> res;
+
+        public List<Integer> postorderTraversal(TreeNode root) {
+            res = new ArrayList<>();
+            if (root == null) {
+                return res;
+            }
+            postOrderTraversal(root);
+            return res;
+        }
+
+        private void postOrderTraversal(TreeNode root) {
+            if (root == null) {
+                return;
+            }
+            postOrderTraversal(root.left);
+            postOrderTraversal(root.right);
+            res.add(root.val);
+        }
+    }
+```
+
+二叉树后续遍历 迭代实现
+```java
+static class Solution {
+
+        public List<Integer> postorderTraversal(TreeNode root) {
+
+            List<Integer> list = new ArrayList<>();
+            Stack<TreeNode> stack = new Stack<>();
+            if (root == null) {
+                return list;
+            }
+            stack.push(root);
+            while (!stack.isEmpty()) {
+                root = stack.pop();
+                if (root == null) {
+                    continue;
+                }
+                list.add(root.val);
+                stack.push(root.left);
+                stack.push(root.right);
+            }
+            Collections.reverse(list);
+            return list;
+        }
+    }
+```
+
+
+
+## 判断一个树是否是查找树
+
+[leetcode98.验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/description/)
+
+[github/StormWangxhu](https://github.com/StormWangxhu/algorithm/blob/master/src/me/wangxhu/leedcode/tree/BST/Question98.java)
+
+### Solution
+
+```java
+static class Range{
+        long low, high;
+    }
+
+    static class Solution {
+
+        public boolean isValidBST(TreeNode root) {
+
+            if (root == null ||
+                    (root.right == null && root.left == null)) return true;
+            Range range = new Range();
+            range.high = Long.MAX_VALUE;
+            range.low = Long.MIN_VALUE;
+            return validate(root, range);
+
+        }
+
+        private boolean validate(TreeNode root, Range range) {
+
+            if ((root.val > range.low) && (root.val < range.high)) {
+                long temp = range.high;
+                if (root.left != null) {
+                    range.high = root.val;
+                    if (!validate(root.left, range)) return false;
+                }
+                if (root.right != null) {
+                    range.high = temp;
+                    range.low = root.val;
+                    if (!validate(root.right, range)) return false;
+                }
+                return true;
+            } else
+                return false;
+        }
+    }
+
+```
+
 
 ## 树的路径和为n的路径
 
