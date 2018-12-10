@@ -8,7 +8,7 @@
     * [2.判断一个链表是否是回文结构](#判断一个链表是否是回文结构)
     * [3.复制含有随机指针节点的链表](#复制含有随机指针节点的链表)
     * [4.单链表奇数位升许偶数位降序整体使有序(频率很高)](#单链表奇数位升许偶数位降序整体使有序)
-    * [5.两个单链表相交的一系列问题]()
+    * [5.两个单链表相交的一系列问题](#两个单链表相交的一系列问题)
     * [6.删除单链表中重复的节点]()
     * [7.将搜索二叉树转换为双向链表]()
     * [8.合并两个有序的单链表](#合并两个有序的单链表)
@@ -404,6 +404,40 @@ public class HeapSort {
 
 
 # 链表
+
+链表是空节点，或者有一个值和一个指向下一个链表的指针，因此很多链表问题可以用递归来处理。
+
+## 两个单链表相交的一系列问题
+
+1.两个单链表相交,寻找相交的起始节点
+
+[leetcode160.相交链表(即求两个单链表的相交起始交点)](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/description/)
+
+设 A 的长度为 a + c，B 的长度为 b + c，其中 c 为尾部公共部分长度，可知 a + c + b = b + c + a。
+
+当访问 A 链表的指针访问到链表尾部时，令它从链表 B 的头部开始访问链表 B；同样地，当访问 B 链表的指针访问到链表尾部时，令它从链表 A 的头部开始访问链表 A。这样就能控制访问 A 和 B 两个链表的指针能同时访问到交点。
+
+### Solution
+
+```java
+    /**
+     * 1ms
+     */
+    static class Solution {
+
+        public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+
+            ListNode l1 = headA, l2 = headB;
+            while (l1 != l2) {
+                l1 = (l1 == null) ? headB : l1.next;
+                l2 = (l2 == null) ? headA : l2.next;
+            }
+            return l1;//return l2;
+        }
+    }
+```
+
+
 
 ## 复制含有随机指针的链表
 
