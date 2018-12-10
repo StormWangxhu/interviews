@@ -25,7 +25,7 @@
     * [1.判断字符数组中是否所有的字符都只出现过一次]()
     * [2.找到字符串中的最长无重复字符子串]()
 * [数组]()
-    * [1.在行和列都排好序的矩阵中找数]()
+    * [1.在行和列都排好序的矩阵中找数](#在行和列都排好序的矩阵中找数)
     * [2.奇数下标都是奇数偶数下标都是偶数]()
     * [3.子数组的最大累加和问题]()
     * [4.边界都是1的最大正方形大小(频率很高)]()
@@ -52,9 +52,39 @@
     * [top命令查看cpu/内存](#top命令查看cpu/内存)
 
 
+# 数组
 
+## 在行和列都排好序的矩阵中找数
 
- # Linux 
+[leetcode74.搜索二维矩阵](https://leetcode-cn.com/problems/search-a-2d-matrix/description/)
+
+### Solution
+
+[github/StormWangxhu](https://github.com/StormWangxhu/algorithm/blob/master/src/me/wangxhu/leedcode/array/Question74.java)
+
+```java
+static class Solution {
+
+        public boolean searchMatrix(int[][] matrix, int target) {
+
+            if (matrix.length == 0)
+                return false;
+            int row = 0, col = matrix[0].length - 1;
+
+            while (row < matrix.length && col >= 0) {
+                if (matrix[row][col] == target)
+                    return true;
+                if (matrix[row][col] < target)
+                    row++;
+                else
+                    col--;
+            }
+            return false;
+        }
+    }
+```
+
+# Linux 
  
  ## top命令查看cpu/内存
  
