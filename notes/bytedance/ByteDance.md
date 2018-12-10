@@ -18,7 +18,7 @@
     * [3.二叉树的直径](#二叉树的直径)
     * [4.二叉树的最长路径(频率很高)]()
     * [5.判断一个树是否是查找树]()
-    * [6.二叉树的层次遍历(频率很高)]()
+    * [6.二叉树的层次遍历(频率很高)](#二叉树的层次遍历)
     * [7.二叉查找树中查找与给定节点最近的节点]()
     * [8.二叉树转换成双向链表]()
 * [字符串]()
@@ -676,4 +676,46 @@ static class Solution {
         }
     }
 ```
+
+## 二叉树的层次遍历
+
+[leetcode102.二叉树的层次遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/description/)
+
+[github/StormWangxhu](https://github.com/StormWangxhu/algorithm/blob/master/src/me/wangxhu/leedcode/tree/bfs/Question102.java)
+
+### Solution
+
+```java
+    static class Solution {
+
+        public List<List<Integer>> levelOrder(TreeNode root) {
+
+            List<List<Integer>> lists = new ArrayList<>();
+            Queue<TreeNode> queue = new LinkedList<>();
+
+            if (root == null) {
+                return lists;
+            }
+            queue.add(root);
+            while (!queue.isEmpty()) {
+                int size = queue.size();
+                List<Integer> subList = new ArrayList<>();
+                while (size-- > 0) {
+                    root = queue.poll();
+                    subList.add(root.val);
+                    if (root.left != null) {
+                        queue.add(root.left);
+                    }
+                    if (root.right != null) {
+                        queue.add(root.right);
+                    }
+                }
+                lists.add(subList);
+            }
+            return lists;
+        }
+    }
+```
+
+
 
