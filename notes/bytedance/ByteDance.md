@@ -9,7 +9,7 @@
     * [3.复制含有随机指针节点的链表](#复制含有随机指针节点的链表)
     * [4.单链表奇数位升许偶数位降序整体使有序(频率很高)](#单链表奇数位升许偶数位降序整体使有序)
     * [5.两个单链表相交的一系列问题](#两个单链表相交的一系列问题)
-    * [6.删除单链表中重复的节点]()
+    * [6.删除单链表中重复的节点](#删除单链表中重复的节点)
     * [7.将搜索二叉树转换为双向链表]()
     * [8.合并两个有序的单链表](#合并两个有序的单链表)
 * [二叉树](#二叉树)
@@ -406,6 +406,53 @@ public class HeapSort {
 # 链表
 
 链表是空节点，或者有一个值和一个指向下一个链表的指针，因此很多链表问题可以用递归来处理。
+
+## 删除单链表中重复的节点
+
+1.删除排序链表中的重复元素
+
+[leetcode83.删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/description/)
+
+### Solution
+
+方法一:非递归实现
+
+```java
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null || head.next == null) {
+                return head;
+            }
+
+            ListNode pre = head;
+            ListNode cur = head.next;
+
+            while (pre != null && cur != null) {
+                if (pre.val == cur.val) {
+                    pre.next = cur.next;
+                } else {
+                    pre = pre.next;
+                    cur = cur.next;
+                }
+            }
+            return head;
+    }
+}
+```
+
+方法二:递归实现
+
+```java
+class Solution{
+    
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null || head.next == null) return head;
+        head.next = deleteDuplicates(head.next);
+        return head.val == head.next.val ? head.next : head;
+    }
+   
+}
+```
 
 ## 两个单链表相交的一系列问题
 
