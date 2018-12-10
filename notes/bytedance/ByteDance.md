@@ -27,7 +27,7 @@
 * [数组]()
     * [1.在行和列都排好序的矩阵中找数](#在行和列都排好序的矩阵中找数)
     * [2.奇数下标都是奇数偶数下标都是偶数](#奇数下标都是奇数偶数下标都是偶数)
-    * [3.子数组的最大累加和问题]()
+    * [3.子数组的最大累加和问题](#子数组的最大累加和问题)
     * [4.边界都是1的最大正方形大小(频率很高)]()
     * [5.有序数组被旋转过后,求最小点]()
     * [6.找出一个有序数组数组的中位数(频率很高)<1>需要实现]()
@@ -54,6 +54,60 @@
 
 
 # 数组
+
+
+## 子数组的最大累加和问题
+
+[leetcode53.子数组的最大累加和问题](https://leetcode-cn.com/problems/maximum-subarray/description/)
+
+### Solution
+
+[github/StormWangxhu]()
+
+方法一:时间复杂度:O(N),空间复杂度O(1)
+
+```java
+static class Solution {
+
+        public int maxSubArray(int[] nums) {
+            if (nums == null || nums.length == 0) {
+                return 0;
+            }
+
+            int max = Integer.MIN_VALUE;
+            int cur = 0;
+            for (int i = 0; i != nums.length; i++) {
+                cur += nums[i];
+                max = Math.max(max, cur);
+                cur = cur < 0 ? 0 : cur;
+            }
+            return max;
+        }
+    }
+```
+
+方法二:时间复杂度:O(N),空间复杂度:O(N)
+
+```java
+static class Solution1 {
+
+        public int maxSubArray(int[] nums) {
+            int temp = nums[0];
+            int sum = nums[0];
+            for (int i = 1; i < nums.length; i++) {
+                if (temp > 0) {
+                    temp += nums[i];
+                } else {
+                    temp = nums[i];
+                }
+
+                if (temp > sum)
+                    sum = temp;
+            }
+            return sum;
+        }
+    }
+```
 
 ## 奇数下标都是奇数偶数下标都是偶数
 
