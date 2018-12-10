@@ -11,7 +11,9 @@
     * [5.两个单链表相交的一系列问题](#两个单链表相交的一系列问题)
     * [6.删除单链表中重复的节点](#删除单链表中重复的节点)
     * [7.将搜索二叉树转换为双向链表]()
+    * [7.将二叉树展开为链表(leetcode114)](#将二叉树展开为链表)
     * [8.合并两个有序的单链表](#合并两个有序的单链表)
+    * [9.将二叉树展开为链表](#将二叉树展开为链表)
 * [二叉树](#二叉树)
     * [1.二叉树先中后序递归和非递归遍历](#二叉树先中后序遍历)
     * [2.树的路径和为n的路径(频率很高)](#树的路径和为n的路径)
@@ -406,6 +408,40 @@ public class HeapSort {
 # 链表
 
 链表是空节点，或者有一个值和一个指向下一个链表的指针，因此很多链表问题可以用递归来处理。
+
+
+## 将二叉树展开为链表
+
+[leetcode114.将二叉树展开为链表](https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/description/)
+
+### Solution
+
+[github/StormWangxhu](https://github.com/StormWangxhu/algorithm/blob/master/src/me/wangxhu/leedcode/linkedlist/Question114.java)
+
+```java
+ static class Solution {
+
+        public void flatten(TreeNode root) {
+
+            if (root == null) {
+                return;
+            }
+            if (root.left != null) {
+                flatten(root.left);
+            }
+            if (root.right != null) {
+                flatten(root.right);
+            }
+            TreeNode temp = root.right;
+            root.right = root.left;
+            root.left = null;
+            while (root.right != null) {
+                root = root.right;
+            }
+            root.right = temp;
+        }
+}
+```
 
 ## 删除单链表中重复的节点
 
