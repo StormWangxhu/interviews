@@ -277,7 +277,7 @@ static class Solution {
 https://www.cnblogs.com/dragonsuc/p/5512797.html
 
 
-## netstat命令查看网络链接/端口使用
+## netstat命令查看网络/接口
 
 百度百科
 
