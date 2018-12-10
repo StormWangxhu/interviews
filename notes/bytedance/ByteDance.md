@@ -28,8 +28,8 @@
     * [1.在行和列都排好序的矩阵中找数](#在行和列都排好序的矩阵中找数)
     * [2.奇数下标都是奇数偶数下标都是偶数](#奇数下标都是奇数偶数下标都是偶数)
     * [3.子数组的最大累加和问题](#子数组的最大累加和问题)
-    * [4.边界都是1的最大正方形大小(频率很高)]()
-    * [5.有序数组被旋转过后,求最小点]()
+    * [4.边界都是1的最大正方形大小(频率很高leetcode85)]()
+    * [5.有序数组被旋转过后,求最小点(leetcode153)](#有序数组被旋转过后,求最小点)
     * [6.找出一个有序数组数组的中位数(频率很高)<1>需要实现]()
     * [7.两个有序数组的中位数<2>需要实现](#寻找两个有序数组的中位数)
     * [8.两个无序数组的中位数<3>需要实现]()
@@ -55,6 +55,50 @@
 
 # 数组
 
+
+## 有序数组被旋转过后,求最小点
+
+旋转概念: 把一个数组最开始的若干的元素搬到数组的末尾,我们称之为旋转.
+
+[leetcode153.寻找旋转排序数组中的最小值](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/description/)
+
+### Solution
+
+方法一:最日鬼的
+```java
+class Solution {
+    
+    public int findMin(int[] arr){
+        Arrays.sort(arr);
+        return arr[0];
+    }
+    
+}
+```
+
+方法二:二分法
+
+```java
+class Solution {
+    
+    public int findMin(int[] arr) {
+        
+        if(arr==null||arr.length==0) 
+            return 0;
+        if(arr.length==1) 
+            return arr[0];
+        int L = 0,R = arr.length-1;
+        while(L<R){
+            int mid = L+(R-L)/2;
+            if(arr[L]<=arr[mid]&&arr[L]>arr[R])
+                L = mid+1;
+            else
+                R = mid;
+        }
+        return arr[L];
+    }
+}
+```
 
 ## 子数组的最大累加和问题
 
