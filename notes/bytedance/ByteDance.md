@@ -12,10 +12,10 @@
     * [6.删除单链表中重复的节点]()
     * [7.将搜索二叉树转换为双向链表]()
     * [8.合并两个有序的单链表](#合并两个有序的单链表)
-* [二叉树]()
+* [二叉树](#二叉树)
     * [1.二叉树先中后序递归和非递归遍历]()
     * [2.树的路径和为n的路径(频率很高)](#树的路径和为n的路径)
-    * [3.二叉树的直径]()
+    * [3.二叉树的直径](#二叉树的直径)
     * [4.二叉树的最长路径(频率很高)]()
     * [5.判断一个树是否是查找树]()
     * [6.二叉树的层次遍历(频率很高)]()
@@ -646,3 +646,34 @@ class Solution {
         }
 }
 ```
+
+
+## 二叉树的直径
+
+[leetcode543.二叉树的直径](https://leetcode-cn.com/problems/diameter-of-binary-tree/description/)
+
+[github/StormWngxhu](https://github.com/StormWangxhu/algorithm/blob/master/src/me/wangxhu/leedcode/tree/recursive/Question543.java)
+
+### Solution
+
+```java
+static class Solution {
+
+        private int max = 0;
+        public int diameterOfBinaryTree(TreeNode root) {
+            maxDepth(root);
+            return max;
+        }
+
+        private int maxDepth(TreeNode root) {
+            if (root == null) {
+                return 0;
+            }
+            int leftDepth = maxDepth(root.left);
+            int rightDepth = maxDepth(root.right);
+            max = Math.max(max, (leftDepth + rightDepth));
+            return Math.max(leftDepth, rightDepth) + 1;
+        }
+    }
+```
+
