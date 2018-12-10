@@ -40,7 +40,7 @@
     * [4.一致性Hash算法的基本原理]() 
   
 * [栈和队列]()
-    * [1.用两个栈实现队列]()
+    * [1.用两个栈实现队列](#用两个栈实现队列)
     
 * [其他]()
     * [1.N个数字,求出其中第K大的数]()
@@ -717,5 +717,64 @@ static class Solution {
     }
 ```
 
+# 栈和队列
+
+## 用两个栈实现队列
+
+[leetcode232.用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/description/)
+
+[github/StormWangxhu]()
+
+### Solution
+
+用两个栈实现队列,一个做数据压入栈,一个做数据弹出栈,注意两点:数据压入栈中的数据要一次性全部弹出;数据弹出栈不为空的时候我们不能压入数据.
+
+```java
+static class MyQueue {
+
+        private Stack<Integer> stackPush;
+        private Stack<Integer> stackPop;
+
+        public MyQueue() {
+            stackPush = new Stack<>();
+            stackPop = new Stack<>();
+        }
 
 
+        public void push(int x) {
+            stackPush.push(x);
+        }
+
+        public int pop() {
+            if (stackPush.isEmpty() && stackPop.isEmpty()) {
+                throw new RuntimeException("stack is empty");
+            } else if (stackPop.isEmpty()) {
+                while (!stackPush.isEmpty()) {
+                    stackPop.push(stackPush.pop());
+                }
+            }
+            return stackPop.pop();
+        }
+
+
+        public int peek() {
+            if (stackPush.isEmpty() && stackPop.isEmpty()) {
+                throw new RuntimeException("stack is empty");
+            } else if (stackPop.isEmpty()) {
+                while (!stackPush.isEmpty()) {
+                    stackPop.push(stackPush.pop());
+                }
+            }
+            return stackPop.peek();
+        }
+
+        public boolean empty() {
+            if (stackPop.isEmpty() && stackPush.isEmpty()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
+    }
+```
