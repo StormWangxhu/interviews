@@ -31,7 +31,7 @@
     * [4.边界都是1的最大正方形大小(频率很高)]()
     * [5.有序数组被旋转过后,求最小点]()
     * [6.找出一个有序数组数组的中位数(频率很高)<1>需要实现]()
-    * [7.两个有序数组的中位数<2>需要实现]()
+    * [7.两个有序数组的中位数<2>需要实现](#寻找两个有序数组的中位数)
     * [8.两个无序数组的中位数<3>需要实现]()
 * [大数据和空间限制]()
     * [1.认识布隆过滤器]()
@@ -80,6 +80,60 @@ static class Solution {
                     col--;
             }
             return false;
+        }
+    }
+```
+
+## 两个有序数组的中位数<2>需要实现
+
+[leetcode4.两个有序数组的中位数](https://leetcode-cn.com/problems/median-of-two-sorted-arrays/description/)
+
+### Solution
+
+难度级别:难
+[github/StormWangxhu](https://github.com/StormWangxhu/algorithm/blob/master/src/me/wangxhu/leedcode/array/Question04.java)
+
+```java
+
+    static class Solution {
+
+        public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+            if (nums1.length > nums2.length)
+                return findMedianSortedArrays(nums2, nums1); //ensure always nums1 is the shortest array
+            int T = nums1.length + nums2.length, low = -1, high = -1;
+            int median = (T - 1) / 2;
+            boolean isOdd = false;
+            if ((T % 2) != 0)
+                isOdd = true;
+
+            int s = 0, e = nums1.length - 1;
+            while (s <= e) {
+                int m = s + (e - s) / 2;
+                if ((median - m - 1) < 0 || nums1[m] >= nums2[median - m - 1]) {
+                    e = m - 1;
+                    low = m;
+                    high = median - m;
+                } else s = m + 1;
+            }
+
+            if (low == -1) {
+                if (isOdd) return nums2[median - nums1.length];
+                else return (double) (nums2[median - nums1.length] + nums2[median - nums1.length + 1]) / 2.0D;
+            } else {
+                if (isOdd) return nums1[low] < nums2[high] ? nums1[low] : nums2[high];
+                else {
+                    //Always sorts maximum of 4 elements hence works in O(1)
+                    List<Integer> list = new ArrayList<>();
+                    list.add(nums1[low]);
+                    if (low + 1 < nums1.length)
+                        list.add(nums1[low + 1]);
+                    list.add(nums2[high]);
+                    if (high + 1 < nums2.length)
+                        list.add(nums2[high + 1]);
+                    Collections.sort(list);
+                    return (double) (list.get(0) + list.get(1)) / 2.0;
+                }
+            }
         }
     }
 ```
