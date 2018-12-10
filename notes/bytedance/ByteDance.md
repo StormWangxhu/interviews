@@ -625,9 +625,10 @@ static class LRUCache{
 
 ### Solution
 
+1.二叉树先序遍历 递归版
+
 [github/StormWangxhu](https://github.com/StormWangxhu/algorithm/blob/master/src/me/wangxhu/leedcode/tree/recursive/Question144.java)
 
-1.二叉树先序遍历 递归版
 ```java
    /**
      * 递归实现
