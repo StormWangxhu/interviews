@@ -84,7 +84,7 @@ static class Solution {
     }
 ```
 
-## 两个有序数组的中位数<2>需要实现
+## 寻找两个有序数组的中位数
 
 [leetcode4.两个有序数组的中位数](https://leetcode-cn.com/problems/median-of-two-sorted-arrays/description/)
 
