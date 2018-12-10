@@ -723,7 +723,7 @@ static class Solution {
 
 [leetcode232.用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/description/)
 
-[github/StormWangxhu]()
+[github/StormWangxhu](https://github.com/StormWangxhu/algorithm/blob/master/src/me/wangxhu/leedcode/stack/Question232.java)
 
 ### Solution
 
