@@ -14,7 +14,7 @@
     * [8.合并两个有序的单链表](#合并两个有序的单链表)
 * [二叉树]()
     * [1.二叉树先中后序递归和非递归遍历]()
-    * [2.树的路径和为n的路径(频率很高)]()
+    * [2.树的路径和为n的路径(频率很高)](#树的路径和为n的路径)
     * [3.二叉树的直径]()
     * [4.二叉树的最长路径(频率很高)]()
     * [5.判断一个树是否是查找树]()
@@ -606,4 +606,43 @@ static class LRUCache{
             }
         }
     }
+```
+
+
+
+# 二叉树
+
+## 树的路径和为n的路径
+
+[leetcode437.路径总和III](https://leetcode-cn.com/problems/path-sum-iii/description/)
+
+[github/StormWangxhu](https://github.com/StormWangxhu/algorithm/blob/master/src/me/wangxhu/leedcode/tree/recursive/Question437.java)
+
+
+### Solution
+
+```java
+class Solution {
+    
+        public int pathSum(TreeNode root, int sum) {
+
+            if (root == null) {
+                return 0;
+            }
+            int res = pathSumWithRoot(root, sum) + pathSum(root.left, sum) + pathSum(root.right, sum);
+            return res;
+        }
+
+        private int pathSumWithRoot(TreeNode root, int sum) {
+             if (root == null) {
+                return 0;
+            }
+            int res = 0;
+            if (root.val == sum) {
+                res++;
+            }
+            res += pathSumWithRoot(root.left, sum - root.val) + pathSumWithRoot(root.right, sum - root.val);
+            return res;
+        }
+}
 ```
