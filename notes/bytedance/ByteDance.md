@@ -86,11 +86,12 @@ static class Solution {
 
 ## 寻找两个有序数组的中位数
 
-[leetcode4.两个有序数组的中位数](https://leetcode-cn.com/problems/median-of-two-sorted-arrays/description/)
+[leetcode04.两个有序数组的中位数](https://leetcode-cn.com/problems/median-of-two-sorted-arrays/description/)
 
 ### Solution
 
 难度级别:难
+
 [github/StormWangxhu](https://github.com/StormWangxhu/algorithm/blob/master/src/me/wangxhu/leedcode/array/Question04.java)
 
 ```java
