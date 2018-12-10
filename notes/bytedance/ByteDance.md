@@ -6,7 +6,7 @@
 * [链表]()
     * [1.链表反转](#链表反转)
     * [2.判断一个链表是否是回文结构](#判断一个链表是否是回文结构)
-    * [3.复制含有随机指针节点的链表](#)
+    * [3.复制含有随机指针节点的链表](#复制含有随机指针节点的链表)
     * [4.单链表奇数位升许偶数位降序整体使有序(频率很高)](#单链表奇数位升许偶数位降序整体使有序)
     * [5.两个单链表相交的一系列问题]()
     * [6.删除单链表中重复的节点]()
@@ -182,8 +182,52 @@ public class HeapSort {
 ```
 
 
-# 链表反转
+# 链表
 
+## 复制含有随机指针的链表
+
+[leetcode138.复制含有随机指针的链表](https://leetcode-cn.com/problems/copy-list-with-random-pointer/description/)
+
+
+### Solution
+
+```java
+  static class Solution{
+
+        public RandomListNode copyRandomList(RandomListNode head) {
+
+            if (head == null) return null;
+            RandomListNode ite = head, next;
+            while (ite != null) {
+                next = ite.next;
+                RandomListNode node = new RandomListNode(ite.label);
+                ite.next = node;
+                node.next = next;
+                ite = next;
+            }
+
+            ite = head;
+            while (ite != null) {
+                if (ite.random != null)
+                    ite.next.random = ite.random.next;
+                ite = ite.next.next;
+            }
+
+            ite = head;
+            RandomListNode copyIte = ite.next, copyHead = ite.next;
+            while (copyIte.next != null) {
+                ite.next = copyIte.next;
+                copyIte.next = ite.next.next;
+                copyIte = copyIte.next;
+                ite = ite.next;
+            }
+            ite.next = null;
+
+            return copyHead;
+
+        }
+    }
+```
 ## 翻转单向链表双向链表
 
 [leetcood206.反转单向链表](https://leetcode-cn.com/problems/reverse-linked-list/description/)
