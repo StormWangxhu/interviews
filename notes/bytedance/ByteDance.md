@@ -26,7 +26,7 @@
     * [2.找到字符串中的最长无重复字符子串]()
 * [数组]()
     * [1.在行和列都排好序的矩阵中找数](#在行和列都排好序的矩阵中找数)
-    * [2.奇数下标都是奇数偶数下标都是偶数]()
+    * [2.奇数下标都是奇数偶数下标都是偶数](#奇数下标都是奇数偶数下标都是偶数)
     * [3.子数组的最大累加和问题]()
     * [4.边界都是1的最大正方形大小(频率很高)]()
     * [5.有序数组被旋转过后,求最小点]()
@@ -50,9 +50,40 @@
   
 * [Linux](#Linux)
     * [top命令查看cpu/内存](#top命令查看cpu/内存)
+    * [netstat命令查看网络/接口]()
 
 
 # 数组
+
+## 奇数下标都是奇数偶数下标都是偶数
+
+[leetcode922.按奇偶排序数组](https://leetcode-cn.com/problems/sort-array-by-parity-ii/description/)
+
+### Solution
+
+[github/StormWangxhu](https://github.com/StormWangxhu/algorithm/blob/master/src/me/wangxhu/leedcode/array/Question922.java)
+
+```java
+static class Solution{
+
+        public int[] sortArrayByParityII(int[] A) {
+
+            int[] sort = new int[A.length];
+            int index0 = 0;
+            int index1 = 1;
+            for(int a: A){
+                if(a % 2==0 ){//偶数
+                    sort[index0] = a;
+                    index0 += 2;
+                }else { //奇数
+                    sort[index1] = a;
+                    index1 += 2;
+                }
+            }
+            return sort;
+        }
+    }
+```
 
 ## 在行和列都排好序的矩阵中找数
 
