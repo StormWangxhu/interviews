@@ -10,7 +10,6 @@
     * [4.单链表奇数位升许偶数位降序整体使有序(频率很高)](#单链表奇数位升许偶数位降序整体使有序)
     * [5.两个单链表相交的一系列问题](#两个单链表相交的一系列问题)
     * [6.删除单链表中重复的节点](#删除单链表中重复的节点)
-    * [7.将搜索二叉树转换为双向链表]()
     * [7.将二叉树展开为链表(leetcode114)](#将二叉树展开为链表)
     * [8.合并两个有序的单链表](#合并两个有序的单链表)
     * [9.将二叉树展开为链表](#将二叉树展开为链表)
@@ -21,8 +20,7 @@
     * [4.二叉树的最长路径(频率很高)]()
     * [5.判断一个树是否是查找树](#判断一个树是否是查找树)
     * [6.二叉树的层次遍历(频率很高)](#二叉树的层次遍历)
-    * [7.二叉查找树中查找与给定节点最近的节点]()
-    * [8.二叉树转换成双向链表]()
+    * [7.二叉搜索树中寻找两个指定节点的公共节点](#二叉搜索树中寻找两个指定节点的公共节点)
 * [字符串]()
     * [1.判断字符数组中是否所有的字符都只出现过一次]()
     * [2.找到字符串中的最长无重复字符子串]()
@@ -1177,6 +1175,25 @@ static class Solution {
 ```
 
 
+## 二叉搜索树中寻找两个指定节点的公共节点
+
+[leetcode235.二叉搜索树中寻找两个指定节点的公共节点](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/)
+
+### Solution
+
+```java
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if (root.val > p.val && root.val > q.val) {
+                return lowestCommonAncestor(root.left, p, q);
+            }
+            if (root.val < p.val && root.val < q.val) {
+                return lowestCommonAncestor(root.right, p, q);
+            }
+            return root;
+    }
+}
+```
 
 ## 判断一个树是否是查找树
 
